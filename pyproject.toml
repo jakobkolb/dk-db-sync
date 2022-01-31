@@ -12,7 +12,6 @@ PyDrive2 = "^1.10.0"
 gspread = "^5.1.1"
 pandas = "^1.4.0"
 ramda = "^0.6.4"
-jupyter = "^1.0.0"
 PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]

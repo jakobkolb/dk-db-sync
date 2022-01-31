@@ -49,7 +49,9 @@ loans["Vertragsdatum"] = loans["Vertragsdatum"].dt.strftime("%m/%d/%Y")
 gc = gspread.service_account_from_dict(secrets["google"])
 sh = gc.open("Cashflow Lizu")
 worksheet = sh.get_worksheet(1)
-worksheet.update(
+return_value = worksheet.update(
     [loans.columns.values.tolist()] + loans.values.tolist(),
     value_input_option="USER_ENTERED",
 )
+
+print(return_value)
