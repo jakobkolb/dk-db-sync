@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "dk-data-sync"
+version = "0.1.0"
+description = "Sync data from sqlight in nextcloud with google sheets"
+authors = ["jakobkolb <jakob.j.kolb@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pyncclient = "^0.7"
+PyDrive2 = "^1.10.0"
+gspread = "^5.1.1"
+pandas = "^1.4.0"
+ramda = "^0.6.4"
+jupyter = "^1.0.0"
+PyYAML = "^6.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
