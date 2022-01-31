@@ -1,0 +1,36 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@v4
+      with:
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}   
+    - name: Install git-secret
+      uses: Kingmidas74/git-secret-github-action@latest
+    - name: Reveal secrets
+      run: git secret reveal
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.8"
+    - name: Setup Poetry
+      uses: Gr1N/setup-poetry@v7
+    - name: Install dependencies
+      run: poetry install
+    - name: Run pipeline
+      run: poetry run python sync.py
+    
