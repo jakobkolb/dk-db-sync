@@ -54,8 +54,6 @@ expense_cards = R.pipe(
     pandas.DataFrame,
 )(cards)
 
-print(expense_cards)
-
 # Write Loans to google sheets
 gc = gspread.service_account_from_dict(secrets["google"])
 sh = gc.open("Cashflow Lizu")
