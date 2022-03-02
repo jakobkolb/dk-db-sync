@@ -30,9 +30,13 @@ def has_label(label, card):
 
 
 def select_sum_from_description(description: str):
-    return R.pipe(
-        R.split("\n"), R.find(lambda s: "Summe" in s), R.split(": "), lambda x: x[-1], lambda x: f"-{x}"
-    )(description)
+    try:
+        return R.pipe(
+            R.split("\n"), R.find(lambda s: "Summe" in s), R.split(": "), lambda x: x[-1], lambda x: f"-{x}"
+        )(description)
+    except AttributeError:
+        print('Warning, card with Ausgaben label missing description!')
+        return '0€'
 
 
 expense_cards = R.pipe(
@@ -41,7 +45,7 @@ expense_cards = R.pipe(
         R.apply_spec(
             {
                 "title": R.prop("name"),
-                "date": R.pipe(R.path(["badges", "due"]), R.tap(print), isoparse, R.invoker(0, 'date'), lambda d: d.strftime("%m/%d/%Y")),
+                "date": R.pipe(R.path(["badges", "due"]), isoparse, R.invoker(0, 'date'), lambda d: d.strftime("%m/%d/%Y")),
                 "amount": R.pipe(R.prop("desc"), select_sum_from_description),
 
             }
