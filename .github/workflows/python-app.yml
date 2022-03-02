@@ -32,6 +32,8 @@ jobs:
       uses: Gr1N/setup-poetry@v7
     - name: Install dependencies
       run: poetry install
-    - name: Run pipeline
-      run: poetry run python sync.py
+    - name: Run DK pipeline
+      run: poetry run python sync_dk_db.py
+    - name: Run Trello pipeline
+      run: poetry run python sync_trello.py
     
